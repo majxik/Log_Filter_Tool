@@ -3,9 +3,9 @@ import sys
 #print("argument list", str(sys.argv))
 
 arg_len=len(sys.argv)
-logcat_file=sys.argv[1]
-argument=sys.argv[2]
-keywords=sys.argv[3]
+#logcat_file=sys.argv[1]
+#argument=sys.argv[2]
+#keywords=sys.argv[3]
 
 help = "Help:.\n" + \
            "-h prints out help containing info about all available switches.\n" + \
@@ -14,16 +14,16 @@ help = "Help:.\n" + \
            "-e <args,...> print out all lines which don't contain any of provided arguments.\n" + \
            "Usage (Python): python logcat_parser.py logcat_file.txt -i word1,word2,word3"
 
-if argument == "-h":
+if "-h" in sys.argv:
     print(help)
-elif argument == "-s":
+elif "-s" in sys.argv and arg_len == 3:
     print("argument -s")
-elif argument == "-i":
+elif "-i" in sys.argv and arg_len == 4:
     print("argument -i")
-elif argument == "-e":
+elif "-e" in sys.argv and arg_len ==4:
     print("argument -e")
 else:
-    print("argument ",argument," is invalid")
+    print("argument is invalid, check help for switches")
 
 #print("logcat_file: ",logcat_file)
 #print("argument: ",argument)
