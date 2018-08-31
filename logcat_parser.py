@@ -1,6 +1,4 @@
 import sys
-#print("number of arguments:", len(sys.argv), "arguments")
-#print("argument list", str(sys.argv))
 
 arg_len=len(sys.argv)
 #logcat_file=sys.argv[1]
@@ -21,8 +19,16 @@ elif "-s" in sys.argv and arg_len == 3:
     print([ line for line in open("logcat_file.txt") if "TEST STARTED" in line])
     print([ line for line in open("logcat_file.txt") if "TEST FINISHED" in line])
 elif "-i" in sys.argv and arg_len == 4:
-    print("argument -i")
+    keywords=sys.argv[3]
+    keywords_list=keywords.split(",")
+    for keyword in keywords_list:
+        search_result=[line for line in open("logcat_file.txt") if keyword in line]
+        print(keyword)
+        for search_result_line in search_result:
+            print(search_result_line)
+
 elif "-e" in sys.argv and arg_len ==4:
+    keywords=sys.argv[3]
     print("argument -e")
 else:
     print("argument is invalid, check help for switches")
@@ -30,7 +36,7 @@ else:
 #print("logcat_file: ",logcat_file)
 #print("argument: ",argument)
 #print("keywords: ",keywords)
-input("press any key to continue")
+#input("press any key to continue")
 
 #s = "11-30 04:39:49.878 === TEST FINISHED ==="
 #match = re.search('\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}', s)
