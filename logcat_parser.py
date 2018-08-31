@@ -1,4 +1,7 @@
 import sys
+import datetime
+from datetime import timedelta
+from datetime import datetime
 
 arg_len=len(sys.argv)
 
@@ -13,9 +16,22 @@ help = "Help:.\n" + \
 if "-h" in sys.argv:
     print(help)
 elif "-s" in sys.argv and arg_len == 3:
-    print("argument -s")
-    print([ line for line in open("logcat_file.txt") if "TEST STARTED" in line])
-    print([ line for line in open("logcat_file.txt") if "TEST FINISHED" in line])
+    test_started = [ line for line in open("logcat_file.txt") if "TEST STARTED" in line]
+    test_finished = [ line for line in open("logcat_file.txt") if "TEST FINISHED" in line]
+
+    start_time_parsed=datetime.strptime(test_started[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
+    end_time_parsed=datetime.strptime(test_finished[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
+
+    timedelta=end_time_parsed-start_time_parsed
+    timedelta_in_sec=timedelta.total_seconds()
+    years=divmod(timedelta_in_sec, 31556926)[0]
+    days=divmod(timedelta_in_sec, 86400)[0]
+    hours = divmod(timedelta_in_sec, 3600)[0]
+    minutes = divmod(timedelta_in_sec, 60)[0]
+    seconds = timedelta_in_sec
+    microseconds = timedelta.microseconds
+
+    print("Test took: ",years,"years",days,"days",hours,"hours",minutes,"minutes",seconds,"seconds")
 #Filter in, number of arguments must be at least 4 (python_script.py textfile.txt switcher word1,word2,word3)
 elif "-i" in sys.argv and arg_len == 4:
     keywords=sys.argv[3]
