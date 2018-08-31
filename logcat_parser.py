@@ -18,6 +18,8 @@ if "-h" in sys.argv:
     print(help)
 elif "-s" in sys.argv and arg_len == 3:
     print("argument -s")
+    print([ line for line in open("logcat_file.txt") if "TEST STARTED" in line])
+    print([ line for line in open("logcat_file.txt") if "TEST FINISHED" in line])
 elif "-i" in sys.argv and arg_len == 4:
     print("argument -i")
 elif "-e" in sys.argv and arg_len ==4:
@@ -29,3 +31,7 @@ else:
 #print("argument: ",argument)
 #print("keywords: ",keywords)
 input("press any key to continue")
+
+#s = "11-30 04:39:49.878 === TEST FINISHED ==="
+#match = re.search('\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{3}', s)
+#date = datetime.datetime.strptime(match.group(), '%m-%d %H:%M:%S:%f')[:-3].date()
