@@ -21,17 +21,16 @@ elif "-s" in sys.argv and arg_len == 3: #Print time diff between TEST STARTEd an
     test_started = [ line for line in open(log_file) if "TEST STARTED" in line]
     test_finished = [ line for line in open(log_file) if "TEST FINISHED" in line]
 
-    start_time_parsed=datetime.strptime(test_started[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
-    end_time_parsed=datetime.strptime(test_finished[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
+    start_time_parsed = datetime.strptime(test_started[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
+    end_time_parsed = datetime.strptime(test_finished[0].split(" ===")[0], "%m-%d %H:%M:%S.%f")
 
-    timedelta=end_time_parsed-start_time_parsed
-    timedelta_in_sec=timedelta.total_seconds()
+    timedelta = end_time_parsed-start_time_parsed
+    timedelta_in_sec = timedelta.total_seconds()
     years = divmod(timedelta_in_sec, 31556926)[0]
     days = divmod(timedelta_in_sec, 86400)[0]
     hours = divmod(timedelta_in_sec, 3600)[0]
     minutes = divmod(timedelta_in_sec, 60)[0]
     seconds = timedelta_in_sec
-    #microseconds = timedelta.microseconds
 
     print("Test took: ",years,"years",days,"days",hours,"hours",minutes,"minutes",seconds,"seconds")
 elif "-i" == sys.argv[2] and arg_len == 4: #Print only rows with arguments given in switch
@@ -43,7 +42,7 @@ elif "-i" == sys.argv[2] and arg_len == 4: #Print only rows with arguments given
                 print(line)
 elif "-e" == sys.argv[2] and arg_len == 4: #Print all rows except rows contains arguments given in switch
     keywords = sys.argv[3]
-    keywords_list=keywords.split(",")
+    keywords_list = keywords.split(",")
     for line in open(log_file, 'r'):
         exists = False
         for keyword in keywords_list:
