@@ -1,10 +1,12 @@
+__author__ = "Martin Maiksnar"
+
 import sys
 import datetime
 from datetime import timedelta
 from datetime import datetime
 
-arg_len=len(sys.argv)
-log_file=sys.argv[1]
+arg_len = len(sys.argv)
+log_file = sys.argv[1]
 
 help = "Help:.\n" + \
            "-h prints out help containing info about all available switches.\n" + \
@@ -24,23 +26,23 @@ elif "-s" in sys.argv and arg_len == 3: #Print time diff between TEST STARTEd an
 
     timedelta=end_time_parsed-start_time_parsed
     timedelta_in_sec=timedelta.total_seconds()
-    years=divmod(timedelta_in_sec, 31556926)[0]
-    days=divmod(timedelta_in_sec, 86400)[0]
+    years = divmod(timedelta_in_sec, 31556926)[0]
+    days = divmod(timedelta_in_sec, 86400)[0]
     hours = divmod(timedelta_in_sec, 3600)[0]
     minutes = divmod(timedelta_in_sec, 60)[0]
     seconds = timedelta_in_sec
-    microseconds = timedelta.microseconds
+    #microseconds = timedelta.microseconds
 
     print("Test took: ",years,"years",days,"days",hours,"hours",minutes,"minutes",seconds,"seconds")
 elif "-i" == sys.argv[2] and arg_len == 4: #Print only rows with arguments given in switch
-    keywords=sys.argv[3]
-    keywords_list=keywords.split(",")
+    keywords = sys.argv[3]
+    keywords_list = keywords.split(",")
     for line in open(log_file, 'r'):
         for expected in keywords_list:
             if expected in line:
                 print(line)
-elif "-e" == sys.argv[2] and arg_len ==4: #Print all rows except rows contains arguments given in switch
-    keywords=sys.argv[3]
+elif "-e" == sys.argv[2] and arg_len == 4: #Print all rows except rows contains arguments given in switch
+    keywords = sys.argv[3]
     keywords_list=keywords.split(",")
     for line in open(log_file, 'r'):
         exists = False
